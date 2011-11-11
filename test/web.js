@@ -51,7 +51,7 @@ test('extend prototype', function() {
     return true;
   };
 
-  aug(Class1, {
+  aug(Class1.prototype, {
     test: function() {
       return false;
     },
@@ -66,4 +66,12 @@ test('extend prototype', function() {
     return true;
   };
   equal(c.test3(), true);
+});
+
+test('extend function', function() {
+  var f = function() {};
+  aug(f, {
+    prop: 42
+  });
+  equal(f.prop, 42);
 });

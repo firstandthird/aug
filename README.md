@@ -26,13 +26,20 @@ or if you are using node
 	var c = aug({}, a, b); 
 	//c = { a: 1, b: 3};
 
+	//Extending a function
+	var f = function() {};
+	aug(f, {
+		prop: 42
+	});
+	//f.prop == 42
+
 	//Extending a prototype
 	var Class1 = function() { };
 	Class1.prototype.test = function() {
 		return 0;
 	};
 
-	aug(Class1, {
+	aug(Class1.prototype, {
 		test2: function() {
 			return 5;
 		}
