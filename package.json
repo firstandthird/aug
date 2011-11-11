@@ -1,7 +1,7 @@
 {
   "name": "aug",
   "description": "a library to augment objects and prototypes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/jgallen23/aug",
   "author": "Greg Allen <@jgaui> (http://jga.me)",
   "repository": {

@@ -75,3 +75,11 @@ test('extend function', function() {
   });
   equal(f.prop, 42);
 });
+
+test('array', function() {
+  Array.prototype.lulz = 42;
+  var o = {};
+  aug(o, []);
+  console.log(o);
+  equal(o.lulz, 42);
+});
