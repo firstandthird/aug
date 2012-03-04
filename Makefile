@@ -1,6 +1,7 @@
 boosh:
-	smoosh make ./build.json
+	./node_modules/.bin/smoosh make ./build.json
+
 test:
-	./node_modules/.bin/nodeunit test/node.js
+	./node_modules/.bin/mocha 
 
 .PHONY: test

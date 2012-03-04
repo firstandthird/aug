@@ -3,9 +3,7 @@
     "DIST_DIR": "./dist",
     "aug": [
       "./lib/copyright.js",
-      "./lib/amd-top.js",
-      "./lib/aug.js",
-      "./lib/amd-bottom.js"
+      "./lib/aug.js"
     ]
   },
   "JSHINT_OPTS": {

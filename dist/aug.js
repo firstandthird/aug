@@ -1,16 +1,10 @@
 /*!
   * aug.js - A javascript library to extend existing objects and prototypes 
-  * v0.0.2
+  * v0.0.3
   * https://github.com/jgallen23/aug
   * copyright JGA 2011
   * MIT License
   */
-
-!function (name, definition) {
-  if (typeof module != 'undefined' && module.exports) module.exports = definition();
-  else if (typeof define == 'function' && typeof define.amd == 'object') define(definition);
-  else this[name] = definition();
-}('aug', function() {
 
 var aug = function __aug() {
   var args = Array.prototype.slice.call(arguments);
@@ -23,6 +17,4 @@ var aug = function __aug() {
   }
   return org;
 };
-
-return aug;
-});
+if (typeof window === 'undefined') module.exports = aug;

@@ -11,7 +11,10 @@
   "dependencies": {
   },
   "devDependencies": {
-    "nodeunit": "*"
+    "chai": "*",
+    "markx": "*",
+    "mocha": "*",
+    "smoosh": "*"
   },
   "main": "./dist/aug.js",
   "keywords": ["ender", "extend", "objects", "prototype"]
