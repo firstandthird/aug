@@ -5,10 +5,6 @@ Aug.js is simple augment/extend library.  If you've used jQuery's $.extend, then
 
 download [aug.js](https://github.com/jgallen23/aug/raw/master/dist/aug.js) from dist directory. 
 
-or
-
-	ender build aug 
-
 or if you are using node
 
 	npm install aug

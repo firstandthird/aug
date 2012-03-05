@@ -1,7 +1,7 @@
 {
   "name": "aug",
   "description": "a library to augment objects and prototypes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/jgallen23/aug",
   "author": "Greg Allen <@jgaui> (http://jga.me)",
   "repository": {
@@ -16,6 +16,6 @@
     "mocha": "*",
     "smoosh": "*"
   },
-  "main": "./dist/aug.js",
+  "main": "./lib/aug.js",
   "keywords": ["ender", "extend", "objects", "prototype"]
 }

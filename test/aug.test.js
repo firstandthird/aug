@@ -1,6 +1,6 @@
 var expect = (typeof chai === 'undefined')?require('chai').expect:chai.expect;
 if (typeof window === 'undefined') { //browser
-  var aug = require('../');
+  var aug = require('../lib/aug');
 }
 
 describe('aug', function() {
@@ -80,5 +80,14 @@ describe('aug', function() {
     var o = {};
     aug(o, []);
     expect(o.lulz).to.equal(42);
+  });
+
+  it('should take in option for deep extend', function() {
+    var o1 = { a: { b: 1, c: 3 }, d: 1 };
+    var o2 = { a: { b: 2 } };
+    aug(true, o1, o2);
+    expect(o1.a.b).to.equal(2);
+    expect(o1.a.c).to.equal(3);
+    expect(o1.d).to.equal(1);
   });
 });
