@@ -132,12 +132,22 @@ describe('aug', function() {
       var defaults = { debug: false, path: __dirname, enable: true };
       var opt = { debug: true, path: '/tmp/woot', fakeThing: 123 };
       var options = aug('defaults', defaults, opt);
-      console.log(options);
       expect(options.debug).to.be.true;
       expect(options.enable).to.be.true;
       expect(defaults.debug).to.be.false;
       expect(defaults.path).to.equal(__dirname);
       expect(options.path).to.equal('/tmp/woot');
+      expect(options.fakeThing).to.not.exist;
+    });
+
+    it('should work with multiple objects', function() {
+      var defaults = { debug: false, path: __dirname, enable: true };
+      var o1 = { debug: true, path: '/tmp/woot', fakeThing: 123 };
+      var o2 = { debug: false, path: '/tmp/woot2', fakeThing: 123 };
+      var options = aug('defaults', defaults, o1, o2);
+      expect(options.debug).to.be.false;
+      expect(options.enable).to.be.true;
+      expect(options.path).to.equal('/tmp/woot2');
       expect(options.fakeThing).to.not.exist;
     });
   });
