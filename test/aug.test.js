@@ -82,12 +82,64 @@ describe('aug', function() {
     expect(o.lulz).to.equal(42);
   });
 
-  it('should take in option for deep extend', function() {
-    var o1 = { a: { b: 1, c: 3 }, d: 1 };
-    var o2 = { a: { b: 2 } };
-    aug(true, o1, o2);
-    expect(o1.a.b).to.equal(2);
-    expect(o1.a.c).to.equal(3);
-    expect(o1.d).to.equal(1);
+  describe('deep', function() {
+    it('should take in option for deep extend', function() {
+      var o1 = { a: { b: 1, c: 3 }, d: 1 };
+      var o2 = { a: { b: 2 } };
+      aug(true, o1, o2);
+      expect(o1.a.b).to.equal(2);
+      expect(o1.a.c).to.equal(3);
+      expect(o1.d).to.equal(1);
+    });
+
+    it('should handle deep extends if root doesn\'t exist', function() {
+      var o1 = { };
+      var o2 = { a: { b: 2 } };
+      aug(true, o1, o2);
+      expect(o1.a.b).to.equal(2);
+    });
+
+    it('should handled multiple levels', function() {
+      var o1 = { a: { b: { c: 0, d: 1 } } };
+      var o2 = { a: { b: { c: 1 } } };
+      aug(true, o1, o2);
+      expect(o1.a.b.c).to.equal(1);
+      expect(o1.a.b.d).to.equal(1);
+    });
+
+    it('should take deep as a string', function() {
+      var o1 = { a: { b: 1, c: 3 }, d: 1 };
+      var o2 = { a: { b: 2 } };
+      aug('deep', o1, o2);
+      expect(o1.a.b).to.equal(2);
+      expect(o1.a.c).to.equal(3);
+      expect(o1.d).to.equal(1);
+    });
   });
+
+  describe('strict', function() {
+    it('should only copy if the property exists', function() {
+      var o1 = { a: 1 };
+      var o2 = { b: 2, a: 2 };
+      aug('strict', o1, o2);
+      expect(o1.a).to.equal(2);
+      expect(o1.b).to.not.exist;
+    });
+    
+  });
+  describe('defaults', function() {
+    it('should overwrite only whats existing in defaults', function() {
+      var defaults = { debug: false, path: __dirname, enable: true };
+      var opt = { debug: true, path: '/tmp/woot', fakeThing: 123 };
+      var options = aug('defaults', defaults, opt);
+      console.log(options);
+      expect(options.debug).to.be.true;
+      expect(options.enable).to.be.true;
+      expect(defaults.debug).to.be.false;
+      expect(defaults.path).to.equal(__dirname);
+      expect(options.path).to.equal('/tmp/woot');
+      expect(options.fakeThing).to.not.exist;
+    });
+  });
+  
 });
