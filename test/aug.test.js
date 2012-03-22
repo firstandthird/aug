@@ -74,12 +74,32 @@ describe('aug', function() {
     });
     expect(f.prop).to.equal(42);
   });
+
+  it('should extend arrays', function() {
+    var o = aug([1,2,3], [4]);
+    expect(o[0]).to.equal(4);
+    expect(o[1]).to.equal(2);
+    expect(o[2]).to.equal(3);
+    expect(o.length).to.equal(3);
+  });
   
   it('should extend prototypes', function() {
     Array.prototype.lulz = 42;
     var o = {};
     aug(o, []);
     expect(o.lulz).to.equal(42);
+  });
+
+  describe('clone', function() {
+    it('should clone object', function() {
+      var o1 = { debug: false };
+
+      var o2 = aug({}, o1);
+      o1.test = 1;
+      expect(o2.test).to.not.exist;
+      expect(o2.debug).to.be.false;
+    });
+    
   });
 
   describe('deep', function() {
@@ -107,48 +127,32 @@ describe('aug', function() {
       expect(o1.a.b.d).to.equal(1);
     });
 
-    it('should take deep as a string', function() {
-      var o1 = { a: { b: 1, c: 3 }, d: 1 };
-      var o2 = { a: { b: 2 } };
-      aug('deep', o1, o2);
-      expect(o1.a.b).to.equal(2);
-      expect(o1.a.c).to.equal(3);
-      expect(o1.d).to.equal(1);
-    });
-  });
+    it('should clone any nested object', function() {
 
-  describe('strict', function() {
-    it('should only copy if the property exists', function() {
-      var o1 = { a: 1 };
-      var o2 = { b: 2, a: 2 };
-      aug('strict', o1, o2);
-      expect(o1.a).to.equal(2);
-      expect(o1.b).to.not.exist;
-    });
-    
-  });
-  describe('defaults', function() {
-    it('should overwrite only whats existing in defaults', function() {
-      var defaults = { debug: false, path: __dirname, enable: true };
-      var opt = { debug: true, path: '/tmp/woot', fakeThing: 123 };
-      var options = aug('defaults', defaults, opt);
-      expect(options.debug).to.be.true;
-      expect(options.enable).to.be.true;
-      expect(defaults.debug).to.be.false;
-      expect(defaults.path).to.equal(__dirname);
-      expect(options.path).to.equal('/tmp/woot');
-      expect(options.fakeThing).to.not.exist;
-    });
+      var schema = {
+        firstName: '',
+        lastName: '',
+        family: {}
+      };
+      var jane = {
+        firstName: 'Jane',
+        lastName: 'Smith',
+        family: {
+          'bob': true
+        }
+      };
+      var john = {
+        firstName: 'John',
+        lastName: 'Smith'
+      };
 
-    it('should work with multiple objects', function() {
-      var defaults = { debug: false, path: __dirname, enable: true };
-      var o1 = { debug: true, path: '/tmp/woot', fakeThing: 123 };
-      var o2 = { debug: false, path: '/tmp/woot2', fakeThing: 123 };
-      var options = aug('defaults', defaults, o1, o2);
-      expect(options.debug).to.be.false;
-      expect(options.enable).to.be.true;
-      expect(options.path).to.equal('/tmp/woot2');
-      expect(options.fakeThing).to.not.exist;
+      var p1 = aug(true, {}, schema, jane);
+      var p2 = aug(true, {}, schema, john);
+      p1.family.test = 1;
+      expect(p1.family).to.not.eql(p2.family);
+      expect(p2.family.bob).to.not.exist;
+      expect(p2.family.test).to.not.exist;
+      
     });
   });
   
