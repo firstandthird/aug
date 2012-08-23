@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/jgallen23/aug.png)](http://travis-ci.org/jgallen23/aug)
 # aug.js
 Aug.js is simple augment/extend library.  If you've used jQuery's $.extend, then you will be familiar with it.
 
