@@ -1,0 +1,5 @@
+{
+  "name": "aug",
+  "version": "0.0.4",
+  "main": "./dist/aug.min.js"
+}
