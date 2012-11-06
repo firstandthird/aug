@@ -4,18 +4,23 @@
   "version": "0.0.4",
   "homepage": "https://github.com/jgallen23/aug",
   "author": "Greg Allen <@jgaui> (http://jga.me)",
+  "license": "MIT",
+  "copyright": "JGA",
   "repository": {
     "type": "git",
     "url": "https://github.com/jgallen23/aug.git"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "*",
-    "markx": "*",
-    "mocha": "*",
-    "smoosh": "*"
+    "mocha": "~1.6.0",
+    "grunt": "~0.3.17",
+    "grunt-simple-mocha": "~0.2.0"
   },
   "main": "./lib/aug.js",
-  "keywords": ["ender", "extend", "objects", "prototype"]
+  "keywords": [
+    "extend",
+    "objects",
+    "prototype"
+  ]
 }
