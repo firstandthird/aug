@@ -45,3 +45,4 @@ or if you are using node
 	c.test2(); //returns 5
 
 
+License: MIT
