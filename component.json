@@ -1,5 +1,7 @@
 {
   "name": "aug",
   "version": "0.0.4",
+  "license": "MIT",
+  "scripts": ["dist/aug.js"],
   "main": "./dist/aug.min.js"
 }
