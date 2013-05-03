@@ -1,10 +1,12 @@
 /*!
  * aug - a library to augment objects and prototypes
- * v0.0.4
+ * v0.1.0
  * https://github.com/jgallen23/aug
- * copyright JGA 2012
+ * copyright JGA 2013
  * MIT License
 */
+
+(function(root) {
 
 var aug = function __aug() {
   var args = Array.prototype.slice.call(arguments);
@@ -31,4 +33,14 @@ var aug = function __aug() {
   }
   return org;
 };
-if (typeof window === 'undefined') module.exports = aug;
+
+if (typeof module !== 'undefined') {
+  module.exports = aug;
+} else {
+  if (typeof define === 'function' && define.amd) {
+    define(function() {return aug;});
+  }
+  root.aug = aug;
+}
+
+}(this));
