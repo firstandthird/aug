@@ -11,7 +11,6 @@ const aug = (...args) => {
     }
   }
   args.forEach((prop) => {
-    // forEach(prop, (propValue, propName) => {
     for (const propName in prop) {
       const propValue = prop[propName];
       // console.log('prop is %s, %s', propName, propValue)
@@ -21,7 +20,6 @@ const aug = (...args) => {
         org[propName] = propValue;
       }
     }
-    // });
   });
   return org;
 };

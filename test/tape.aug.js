@@ -2,7 +2,6 @@
 const test = require('tape');
 const aug = require('../index.js');
 
-
 test('should override', (t) => {
   t.plan(1);
   const o1 = { a: 1 };
