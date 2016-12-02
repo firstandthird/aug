@@ -1,10 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
 const aug = require('../lib/aug');
-// var expect = (typeof chai === 'undefined')?require('chai').expect:chai.expect;
-// if (typeof window === 'undefined') { //browser
-//   var aug = require('../lib/aug');
-// }
 
 describe('aug', function() {
 
@@ -12,6 +8,7 @@ describe('aug', function() {
     var o1 = { a: 1 };
     var o2 = { a: 2 };
     var o = aug(o1, o2);
+    // console.log(Object.keys(o))
     expect(o.a).to.equal(2);
   });
 
@@ -119,7 +116,6 @@ describe('aug', function() {
       expect(o1.d).to.equal(1);
     });
   });
-
   describe('strict', function() {
     it('should only copy if the property exists', function() {
       var o1 = { a: 1 };
