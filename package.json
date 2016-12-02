@@ -1,7 +1,7 @@
 {
   "name": "aug",
   "description": "a library to augment objects and prototypes",
-  "main": "./lib/aug.js",
+  "main": "./index.js",
   "version": "0.2.0",
   "homepage": "https://github.com/firstandthird/aug",
   "author": "Greg Allen <code@firstandthird.com> (http://firstandthird.com/)",
@@ -12,7 +12,7 @@
     "url": "https://github.com/firstandthird/aug.git"
   },
   "scripts": {
-    "lint": "eslint ./test/aug.test.js",
+    "lint": "eslint ./test/tape.aug.js",
     "test": "tape test/*.js | tap-spec"
   },
   "dependencies": {
