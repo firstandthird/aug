@@ -1,7 +1,10 @@
-var expect = (typeof chai === 'undefined')?require('chai').expect:chai.expect;
-if (typeof window === 'undefined') { //browser
-  var aug = require('../lib/aug');
-}
+'use strict';
+const expect = require('chai').expect;
+const aug = require('../lib/aug');
+// var expect = (typeof chai === 'undefined')?require('chai').expect:chai.expect;
+// if (typeof window === 'undefined') { //browser
+//   var aug = require('../lib/aug');
+// }
 
 describe('aug', function() {
 
@@ -28,7 +31,7 @@ describe('aug', function() {
     expect(o1.b).to.equal(2);
     expect(o1).to.equal(o);
   });
-  
+
   it('should take N number of objects', function() {
     var o1 = { a: 1, d: 7 };
     var o2 = { a: 2, b: 4 };
@@ -40,7 +43,7 @@ describe('aug', function() {
     expect(o1.b).to.equal(5);
     expect(o1.c).to.equal(1);
     expect(o1.d).to.equal(7);
-    
+
   });
 
   it('should extend prototypes', function() {
@@ -66,7 +69,7 @@ describe('aug', function() {
     };
     expect(c.test3()).to.be.true;
   });
-  
+
   it('should extend a function', function() {
     var f = function() {};
     aug(f, {
@@ -74,7 +77,7 @@ describe('aug', function() {
     });
     expect(f.prop).to.equal(42);
   });
-  
+
   it('should extend prototypes', function() {
     Array.prototype.lulz = 42;
     var o = {};
@@ -125,7 +128,7 @@ describe('aug', function() {
       expect(o1.a).to.equal(2);
       expect(o1.b).to.not.exist;
     });
-    
+
   });
   describe('defaults', function() {
     it('should overwrite only whats existing in defaults', function() {
@@ -151,5 +154,5 @@ describe('aug', function() {
       expect(options.fakeThing).to.not.exist;
     });
   });
-  
+
 });

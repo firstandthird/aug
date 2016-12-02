@@ -1,23 +1,33 @@
 {
   "name": "aug",
   "description": "a library to augment objects and prototypes",
-  "version": "0.1.0",
-  "homepage": "https://github.com/jgallen23/aug",
-  "author": "Greg Allen <@jgaui> (http://jga.me)",
+  "main": "./lib/aug.js",
+  "version": "0.2.0",
+  "homepage": "https://github.com/firstandthird/aug",
+  "author": "Greg Allen <code@firstandthird.com> (http://firstandthird.com/)",
   "license": "MIT",
   "copyright": "JGA",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jgallen23/aug.git"
+    "url": "https://github.com/firstandthird/aug.git"
+  },
+  "scripts": {
+    "lint": "eslint ./test/aug.test.js",
+    "test": "mocha test"
   },
   "dependencies": {},
   "devDependencies": {
+    "eslint": "^3.9.1",
+    "eslint-config-firstandthird": "^3.0.2",
+    "eslint-plugin-import": "^2.1.0",
     "chai": "*",
     "mocha": "~1.6.0",
     "grunt": "~0.3.17",
     "grunt-simple-mocha": "~0.2.0"
   },
-  "main": "./lib/aug.js",
+  "eslintConfig": {
+  "extends": "firstandthird"
+  },
   "keywords": [
     "extend",
     "objects",
