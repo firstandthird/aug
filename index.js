@@ -1,6 +1,4 @@
 'use strict';
-const forEach = require('lodash.foreach');
-const _ = require('lodash');
 const aug = (...args) => {
   let org = args.shift();
   let type = '';

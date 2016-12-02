@@ -16,8 +16,6 @@
     "test": "tape test/*.js | tap-spec"
   },
   "dependencies": {
-    "lodash": "^4.17.2",
-    "lodash.foreach": "^4.5.0"
   },
   "devDependencies": {
     "eslint": "^3.9.1",
