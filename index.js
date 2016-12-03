@@ -1,5 +1,6 @@
 'use strict';
-const aug = (...args) => {
+const aug = function() {
+  const args = Array.prototype.slice.call(arguments);
   let org = args.shift();
   let type = '';
   if (typeof org === 'string' || typeof org === 'boolean') {
