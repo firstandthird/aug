@@ -149,3 +149,22 @@ test('should work with multiple objects', (t) => {
   t.equal(options.path, '/tmp/woot2');
   t.equal(options.fakeThing, undefined);
 });
+
+test('should overwrite arrays (not merge them)', (t) => {
+  t.plan(2);
+  const o1 = {
+    tasks: {
+      default: ['initialize', ['stylesheets', 'scripts'], 'watcher'],
+      dev: [['updates', 'initialize'], 'watcher'],
+      prod: ['default', 'hash']
+    }
+  };
+  const o2 = {
+    tasks: {
+      prod: ['initialize', ['scripts', 'stylesheets']]
+    }
+  };
+  const r = aug(true, o1, o2);
+  t.equal(r.tasks.prod[0], 'initialize');
+  t.equal(r.tasks.prod[1][0], 'scripts');
+});

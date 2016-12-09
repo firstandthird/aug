@@ -14,7 +14,11 @@ const aug = function() {
   args.forEach((prop) => {
     for (const propName in prop) {
       const propValue = prop[propName];
-      // console.log('prop is %s, %s', propName, propValue)
+      // just overwrite arrays:
+      if (Array.isArray(propValue)) {
+        org[propName] = propValue;
+        return;
+      }
       if (type === 'deep' && typeof propValue === 'object' && typeof org[propName] !== 'undefined') {
         aug(type, org[propName], propValue);
       } else if (type !== 'strict' || (type === 'strict' && typeof org[propName] !== 'undefined')) {
