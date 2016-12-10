@@ -1,4 +1,11 @@
 
+1.0.1 / 2016-12-10
+==================
+
+  * fixed bug with arrays
+  * renamed test file
+  * fixed eslint
+
 1.0.0 / 2016-12-10
 ==================
 
