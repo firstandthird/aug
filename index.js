@@ -17,7 +17,7 @@ const aug = function() {
       // just overwrite arrays:
       if (Array.isArray(propValue)) {
         org[propName] = propValue;
-        return;
+        continue;
       }
       if (type === 'deep' && typeof propValue === 'object' && typeof org[propName] !== 'undefined') {
         aug(type, org[propName], propValue);
