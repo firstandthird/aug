@@ -150,6 +150,31 @@ test('should work with multiple objects', (t) => {
   t.equal(options.fakeThing, undefined);
 });
 
+test('somewhat real default example', (t) => {
+  t.plan(1);
+  const defaults = {
+    plugins: {},
+    env: 'production'
+  };
+  const env = {
+    plugins: {
+      loadStuff: {
+        options: '123'
+      }
+    },
+    env: 'stage'
+  };
+  const opts = aug({}, defaults, env);
+  t.deepEqual(opts, {
+    env: 'stage',
+    plugins: {
+      loadStuff: {
+        options: '123'
+      }
+    }
+  });
+});
+
 test('should overwrite arrays (not merge them)', (t) => {
   t.plan(2);
   const o1 = {
