@@ -20,6 +20,10 @@ const aug = function() {
         continue;
       }
       if (type === 'deep' && typeof propValue === 'object' && typeof org[propName] !== 'undefined') {
+        if (typeof org[propName] !== 'object') {
+          org[propName] = propValue;
+          continue;
+        }
         aug(type, org[propName], propValue);
       } else if (type !== 'strict' || (type === 'strict' && typeof org[propName] !== 'undefined')) {
         org[propName] = propValue;

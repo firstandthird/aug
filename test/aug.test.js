@@ -90,7 +90,7 @@ test('should take in option for deep extend', (t) => {
 });
 
 test('objects should override basic values', (t) => {
-  t.plan(3);
+  t.plan(1);
   const o1 = { a: { b: 1, c: 3 }, d: 1 };
   const o2 = { a: { b: { x: 1 } } };
   aug(true, o1, o2);
@@ -102,7 +102,7 @@ test('objects should override basic values', (t) => {
       c: 3
     },
     d: 1
-  });
+  }, o1);
 });
 
 test('should handle deep extends if root doesn\'t exist', (t) => {
