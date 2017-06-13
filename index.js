@@ -1,11 +1,15 @@
 'use strict';
-
 const functions = {
   deep(...args) {
     const org = {};
     args.forEach((prop) => {
       for (const propName in prop) {
         const propValue = prop[propName];
+        if (Array.isArray(propValue)) {
+          args[0][propName] = propValue;
+          org[propName] = propValue;
+          continue;
+        }
         if (typeof propValue === 'object' && typeof org[propName] !== 'undefined') {
           module.exports.deep(org[propName], propValue);
         } else {
@@ -52,7 +56,7 @@ module.exports = (...args) => {
   }
   const org = {};
   args.forEach((prop) => {
-    for (const propName in prop) {
+    for (const propName in prop) { //eslint-disable-line
       const propValue = prop[propName];
       args[0][propName] = propValue;
       org[propName] = propValue;

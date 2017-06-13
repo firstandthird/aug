@@ -1,4 +1,23 @@
 
+1.0.1 / 2016-12-10
+==================
+
+  * fixed bug with arrays
+  * renamed test file
+  * fixed eslint
+
+1.0.0 / 2016-12-10
+==================
+
+  * overwrites arrays (#16)
+  * add travis
+  * update package
+  * cleanup
+  * remove unneeded dependencies
+  * tests updated to tape, replace grunt with main file
+  * es6, remove browser things, still old tests
+  * package updates, npm test
+
 0.1.0 / 2013-05-03 
 ==================
 
