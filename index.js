@@ -12,6 +12,11 @@ const functions = {
           continue;
         }
         if (typeof propValue === 'object' && typeof org[propName] !== 'undefined') {
+          if (typeof org[propName] !== 'object') {
+            args[0][propName] = propValue;
+            org[propName] = propValue;
+            continue;
+          }
           module.exports.deep(org[propName], propValue);
         } else {
           args[0][propName] = propValue;
@@ -53,10 +58,10 @@ const functions = {
 module.exports = function() {
   const args = Array.from(arguments);
   if (typeof args[0] === 'string') {
-    throw new Error(`aug v1.0.0 and higher require you to call with "aug.${args[0]} not aug("${args[0]}")"`);
+    throw new Error(`aug v2.0.0 and higher require you to call with "aug.${args[0]} not aug("${args[0]}")"`);
   }
   if (typeof args[0] === 'boolean') {
-    throw new Error('aug v1.0.0 and higher require you to use "aug.deep(...)" instead of "aug(true, ....)"');
+    throw new Error('aug v2.0.0 and higher require you to use "aug.deep(...)" instead of "aug(true, ....)"');
   }
   const org = {};
   args.forEach((prop) => {
