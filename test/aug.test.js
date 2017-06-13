@@ -26,6 +26,8 @@ test('should change first param', (t) => {
   const o = aug(o1, o2);
   t.equal(o1.a, 1);
   t.equal(o1.b, 2);
+  // console.log('----')
+  // console.log(o1)
   t.deepEqual(o1, o);
 });
 

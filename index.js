@@ -1,6 +1,7 @@
 'use strict';
 const functions = {
-  deep(...args) {
+  deep() {
+    const args = Array.from(arguments);
     const org = {};
     args.forEach((prop) => {
       for (const propName in prop) {
@@ -20,7 +21,8 @@ const functions = {
     });
     return org;
   },
-  strict(...args) {
+  strict() {
+    const args = Array.from(arguments);
     const org = {};
     args.forEach((prop) => {
       for (const propName in prop) {
@@ -33,7 +35,8 @@ const functions = {
     });
     return org;
   },
-  defaults(...args) {
+  defaults() {
+    const args = Array.from(arguments);
     const org = {};
     args.forEach((prop) => {
       for (const propName in prop) {
@@ -47,7 +50,8 @@ const functions = {
   }
 };
 
-module.exports = (...args) => {
+module.exports = function() {
+  const args = Array.from(arguments);
   if (typeof args[0] === 'string') {
     throw new Error(`aug v1.0.0 and higher require you to call with "aug.${args[0]} not aug("${args[0]}")"`);
   }
