@@ -26,7 +26,7 @@ test('should change first param', (t) => {
   const o = aug(o1, o2);
   t.equal(o1.a, 1);
   t.equal(o1.b, 2);
-  t.equal(o1, o);
+  t.deepEqual(o1, o);
 });
 
 test('should take N number of objects', (t) => {
@@ -79,11 +79,11 @@ test('should extend prototypes', (t) => {
   t.equal(o.lulz, 42);
 });
 
-test('should take in option for deep extend', (t) => {
+test('supports deep extend', (t) => {
   t.plan(3);
   const o1 = { a: { b: 1, c: 3 }, d: 1 };
   const o2 = { a: { b: 2 } };
-  aug(true, o1, o2);
+  aug.deep(o1, o2);
   t.equal(o1.a.b, 2);
   t.equal(o1.a.c, 3);
   t.equal(o1.d, 1);
@@ -93,7 +93,7 @@ test('should handle deep extends if root doesn\'t exist', (t) => {
   t.plan(1);
   const o1 = { };
   const o2 = { a: { b: 2 } };
-  aug(true, o1, o2);
+  aug.deep(o1, o2);
   t.equal(o1.a.b, 2);
 });
 
@@ -101,26 +101,16 @@ test('should handled multiple levels', (t) => {
   t.plan(2);
   const o1 = { a: { b: { c: 0, d: 1 } } };
   const o2 = { a: { b: { c: 1 } } };
-  aug(true, o1, o2);
+  aug.deep(o1, o2);
   t.equal(o1.a.b.c, 1);
   t.equal(o1.a.b.d, 1);
 });
 
-test('should take deep as a string', (t) => {
-  t.plan(3);
-  const o1 = { a: { b: 1, c: 3 }, d: 1 };
-  const o2 = { a: { b: 2 } };
-  aug('deep', o1, o2);
-  t.equal(o1.a.b, 2);
-  t.equal(o1.a.c, 3);
-  t.equal(o1.d, 1);
-});
-
-test('should only copy if the property exists', (t) => {
+test('strict should only copy if the property exists', (t) => {
   t.plan(2);
   const o1 = { a: 1 };
   const o2 = { b: 2, a: 2 };
-  aug('strict', o1, o2);
+  aug.strict(o1, o2);
   t.equal(o1.a, 2);
   t.equal(o1.b, undefined);
 });
@@ -129,7 +119,7 @@ test('should overwrite only whats existing in defaults', (t) => {
   t.plan(6);
   const defaults = { debug: false, path: __dirname, enable: true };
   const opt = { debug: true, path: '/tmp/woot', fakeThing: 123 };
-  const options = aug('defaults', defaults, opt);
+  const options = aug.defaults(defaults, opt);
   t.equal(options.debug, true);
   t.equal(options.enable, true);
   t.equal(defaults.debug, false);
@@ -143,9 +133,33 @@ test('should work with multiple objects', (t) => {
   const defaults = { debug: false, path: __dirname, enable: true };
   const o1 = { debug: true, path: '/tmp/woot', fakeThing: 123 };
   const o2 = { debug: false, path: '/tmp/woot2', fakeThing: 123 };
-  const options = aug('defaults', defaults, o1, o2);
+  const options = aug.defaults(defaults, o1, o2);
   t.equal(options.debug, false);
   t.equal(options.enable, true);
   t.equal(options.path, '/tmp/woot2');
   t.equal(options.fakeThing, undefined);
+});
+
+test('throws error if called with old-style string argument as first parameter', (t) => {
+  t.plan(1);
+  const o1 = { a: 1 };
+  const o2 = { b: 2, a: 2 };
+  try {
+    aug('strict', o1, o2);
+  } catch (e) {
+    t.pass();
+    t.end();
+  }
+});
+
+test('throws error if called with old-style boolean argument as first parameter', (t) => {
+  t.plan(1);
+  const o1 = { a: 1 };
+  const o2 = { b: 2, a: 2 };
+  try {
+    aug(true, o1, o2);
+  } catch (e) {
+    t.pass();
+    t.end();
+  }
 });

@@ -2,7 +2,7 @@
   "name": "aug",
   "description": "a library to augment objects and prototypes",
   "main": "./index.js",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/firstandthird/aug",
   "author": "Greg Allen <code@firstandthird.com> (http://firstandthird.com/)",
   "license": "MIT",
