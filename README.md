@@ -12,18 +12,20 @@ Aug.js is simple augment/extend library.  If you've used jQuery's $.extend, then
 ```javascript
 const person = { info: { first: 'bob', last: 'smith' } };
 const address = { info: { last: 'jones', age: 5 }, address: '123 main st' };
-const merged = aug(person, address);
-//merged == { info: { first: 'bob', last: 'jones', age: 5 }, address: '123 main st ' }
-//person and address objects stay the same
+const pet = { pet: { name: 'sparky' } };
+const merged = aug(person, address, pet);
+//merged == { info: { first: 'bob', last: 'jones', age: 5 }, address: '123 main st ', pet: { name: 'sparky } };
+//person, address, pet objects stay the same
 ```
 
 ### Defaults
-Only merge if it exists
+Only merge if it exists in the first argument
 
 ```javascript
-const person = { info: { first: 'bob', last: 'smith' } };
+const person = { info: { first: 'bob', last: 'smith' } , pet: { name: '' } };
 const address = { info: { last: 'jones', age: 5 }, address: '123 main st' };
-const merged = aug.defaults(person, address);
-//merged == { info: { first: 'bob', last: 'jones' } }
-//person and address objects stay the same
+const pet = { pet: { name: 'sparky' } };
+const merged = aug.defaults(person, address, pet);
+//merged == { info: { first: 'bob', last: 'jones' }, pet: { name: 'sparky' }}
+//person, address, pet objects stay the same
 ```
