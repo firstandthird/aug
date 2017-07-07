@@ -101,6 +101,17 @@ test('should not change first param', (t) => {
   t.end();
 });
 
+test('deep merge', (t) => {
+  const person = { info: { first: 'bob', last: 'smith' } };
+  const address = { info: { last: 'jones', age: 5 }, address: '123 main st' };
+  const pet = { pet: { name: 'sparky' } };
+  const merged = aug(person, address, pet);
+  t.deepEqual(person, { info: { first: 'bob', last: 'smith' } }, 'does not modify original object');
+  t.deepEqual(address, { info: { last: 'jones', age: 5 }, address: '123 main st' }, 'does not modify original object');
+  t.deepEqual(merged, { info: { first: 'bob', last: 'jones', age: 5 }, address: '123 main st', pet: { name: 'sparky' } });
+  t.end();
+});
+
 test('defaults should work with multiple objects', (t) => {
   t.plan(4);
   const defaults = { debug: false, path: __dirname, enable: true };
