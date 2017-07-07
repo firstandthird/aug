@@ -23,8 +23,9 @@ const merge = function() {
         destObject[propName] = propValue;
         continue;
       }
-      // if the source and destination values are both objects then merge them appropriately:
+      // if the source and destination values are both objects then recursively merge them:
       if (typeof propValue === 'object' && typeof destObject[propName] === 'object') {
+        // get the right merging function for the recursive merge:
         const merger = useDefaults ? module.exports.defaults : module.exports;
         destObject[propName] = merger(destObject[propName], propValue);
         continue;
