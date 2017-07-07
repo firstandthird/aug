@@ -1,57 +1,43 @@
 /* eslint-disable no-restricted-syntax, guard-for-in, prefer-rest-params */
 'use strict';
-module.exports = function() {
+
+// bind 'this' to true to use defaults-only version
+const merge = function() {
   const args = Array.from(arguments);
-  const org = args[0];
-  args.forEach((prop) => {
+  const useDefaults = args[0];
+  const destObject = {};
+  args.slice(1, args.length).forEach((prop) => {
     for (const propName in prop) {
+      if (useDefaults && args[1][propName] === undefined) {
+        return;
+      }
       const propValue = prop[propName];
       if (Array.isArray(propValue)) {
-        args[0][propName] = propValue;
-        org[propName] = propValue;
+        destObject[propName] = propValue;
         continue;
       }
-      if (typeof propValue === 'object' && typeof org[propName] !== 'undefined') {
-        if (typeof org[propName] !== 'object') {
-          args[0][propName] = propValue;
-          org[propName] = propValue;
+      if (typeof propValue === 'object' && typeof destObject[propName] !== 'undefined') {
+        if (typeof destObject[propName] !== 'object') {
+          destObject[propName] = propValue;
           continue;
         }
-        module.exports.deep(org[propName], propValue);
+        destObject[propName] = module.exports.defaults(destObject[propName], propValue);//.bind(true);
       } else {
-        args[0][propName] = propValue;
-        org[propName] = propValue;
+        destObject[propName] = propValue;
       }
     }
   });
-  return org;
+  return destObject;
 };
-module.exports.deep = module.exports;
-module.exports.strict = function() {
+
+module.exports = function() {
   const args = Array.from(arguments);
-  const org = {};
-  args.forEach((prop) => {
-    for (const propName in prop) {
-      if (args[0][propName]) {
-        const propValue = prop[propName];
-        args[0][propName] = propValue;
-        org[propName] = propValue;
-      }
-    }
-  });
-  return org;
+  args.unshift(false);
+  return merge.apply(null, args);
 };
 
 module.exports.defaults = function() {
   const args = Array.from(arguments);
-  const org = {};
-  args.forEach((prop) => {
-    for (const propName in prop) {
-      if (args[0][propName] !== undefined) {
-        const propValue = prop[propName];
-        org[propName] = propValue;
-      }
-    }
-  });
-  return org;
+  args.unshift(true);
+  return merge.apply(null, args);
 };
