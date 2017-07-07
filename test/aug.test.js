@@ -93,6 +93,31 @@ test('should overwrite arrays (not merge them)', (t) => {
   t.equal(r.tasks.prod[1][0], 'scripts');
 });
 
+test('somewhat real merge example', (t) => {
+  t.plan(1);
+  const defaults = {
+    plugins: {},
+    env: 'production'
+  };
+  const env = {
+    plugins: {
+      loadStuff: {
+        options: '123'
+      }
+    },
+    env: 'stage'
+  };
+  const opts = aug(defaults, env);
+  t.deepEqual(opts, {
+    env: 'stage',
+    plugins: {
+      loadStuff: {
+        options: '123'
+      }
+    }
+  });
+});
+
 test('should not change first param', (t) => {
   const o1 = { a: 1 };
   const o2 = { b: 2 };
