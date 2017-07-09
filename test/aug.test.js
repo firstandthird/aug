@@ -3,20 +3,22 @@ const test = require('tape');
 const aug = require('../index.js');
 
 test('should override', (t) => {
-  t.plan(1);
+  t.plan(2);
   const o1 = { a: 1 };
   const o2 = { a: 2 };
   const o = aug(o1, o2);
   t.equal(o.a, 2);
+  t.deepEqual(o1, { a: 1 });
 });
 
 test('should extend', (t) => {
-  t.plan(2);
+  t.plan(3);
   const o1 = { a: 1 };
   const o2 = { b: 2 };
   const o = aug(o1, o2);
   t.equal(o.a, 1);
   t.equal(o.b, 2);
+  t.deepEqual(o1, { a: 1 });
 });
 
 test('should take N number of objects', (t) => {
@@ -58,11 +60,12 @@ test('objects should override basic values', (t) => {
 });
 
 test('should handle deep extends if root doesn\'t exist', (t) => {
-  t.plan(1);
+  t.plan(2);
   const o1 = { };
   const o2 = { a: { b: 2 } };
   const merged = aug(o1, o2);
   t.equal(merged.a.b, 2);
+  t.deepEqual(o1, {});
 });
 
 test('should handled multiple levels', (t) => {
@@ -75,7 +78,7 @@ test('should handled multiple levels', (t) => {
 });
 
 test('should overwrite arrays (not merge them)', (t) => {
-  t.plan(2);
+  t.plan(3);
   const o1 = {
     tasks: {
       default: ['initialize', ['stylesheets', 'scripts'], 'watcher'],
@@ -91,6 +94,13 @@ test('should overwrite arrays (not merge them)', (t) => {
   const r = aug(o1, o2);
   t.equal(r.tasks.prod[0], 'initialize');
   t.equal(r.tasks.prod[1][0], 'scripts');
+  t.deepEqual(o1, {
+    tasks: {
+      default: ['initialize', ['stylesheets', 'scripts'], 'watcher'],
+      dev: [['updates', 'initialize'], 'watcher'],
+      prod: ['default', 'hash']
+    }
+  });
 });
 
 test('somewhat real merge example', (t) => {
