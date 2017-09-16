@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lint": "eslint ./test/tape.aug.js",
-    "test": "tap test/*.js --cov"
+    "test": "tap test/*.js --cov | tap-spec"
   },
   "dependencies": {},
   "devDependencies": {
