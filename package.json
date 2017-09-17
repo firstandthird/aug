@@ -13,16 +13,15 @@
   },
   "scripts": {
     "lint": "eslint ./test/tape.aug.js",
-    "test": "tape test/*.js | tap-spec"
+    "test": "tap test/*.js --cov | tap-spec"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "eslint": "^3.9.1",
     "eslint-config-firstandthird": "^3.0.2",
     "eslint-plugin-import": "^2.1.0",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.6.2"
+    "tap": "^10.7.2",
+    "tap-spec": "^4.1.1"
   },
   "eslintConfig": {
     "extends": "firstandthird"

@@ -1,5 +1,5 @@
 'use strict';
-const test = require('tape');
+const test = require('tap').test;
 const aug = require('../index.js');
 
 test('should override', (t) => {
