@@ -4,7 +4,7 @@
 // first arg is 'true' if using defaults-only version
 // first arg is 'false' if just doing deep merge:
 const merge = function() {
-  const args = Array.from(arguments);
+  const args = Array.prototype.slice.call(arguments);
   const useDefaults = args[0];
   const destObject = {};
   // for each object in the rest of the argument list:
@@ -39,14 +39,14 @@ const merge = function() {
 
 // exported copy of deep merge:
 module.exports = function() {
-  const args = Array.from(arguments);
+  const args = Array.prototype.slice.call(arguments);
   args.unshift(false);
   return merge.apply(null, args);
 };
 
 // exported copy of defaults:
 module.exports.defaults = function() {
-  const args = Array.from(arguments);
+  const args = Array.prototype.slice.call(arguments);
   args.unshift(true);
   return merge.apply(null, args);
 };
