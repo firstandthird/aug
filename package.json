@@ -1,34 +1,68 @@
 {
   "name": "aug",
-  "description": "a library to augment objects and prototypes",
-  "main": "index.js",
-  "version": "2.0.1",
-  "homepage": "https://github.com/firstandthird/aug",
-  "author": "Greg Allen <code@firstandthird.com> (http://firstandthird.com/)",
-  "license": "MIT",
-  "copyright": "JGA",
+  "version": "3.0.0",
+  "description": "A library to augment objects and prototypes",
+  "main": "dist/aug.js",
+  "module": "dist/aug.esm.js",
+  "scripts": {
+    "start": "scriptkit",
+    "dev": "scriptkit dev",
+    "test": "cat test/aug.test.dist.js | tape-run --static . --browser phantomjs --render tap-spec",
+    "prepublishOnly": "scriptkit"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/firstandthird/aug.git"
-  },
-  "scripts": {
-    "lint": "eslint ./test/tape.aug.js",
-    "test": "tap test/*.js --cov | tap-spec"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "eslint": "^3.9.1",
-    "eslint-config-firstandthird": "^3.0.2",
-    "eslint-plugin-import": "^2.1.0",
-    "tap": "^10.7.2",
-    "tap-spec": "^4.1.1"
-  },
-  "eslintConfig": {
-    "extends": "firstandthird"
+    "url": "git+https://github.com/firstandthird/aug.git"
   },
   "keywords": [
     "extend",
     "objects",
     "prototype"
-  ]
+  ],
+  "author": "First+Third <code@firstandthird.com> (http://firstandthird.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/firstandthird/aug/issues"
+  },
+  "homepage": "https://github.com/firstandthird/aug#readme",
+  "devDependencies": {
+    "eslint-config-firstandthird": "^4.3.0",
+    "eslint-plugin-compat": "^2.7.0",
+    "eslint-plugin-import": "^2.16.0",
+    "phantomjs-prebuilt": "^2.1.16",
+    "scriptkit": "^2.0.1",
+    "static-server": "^2.2.1",
+    "tap-spec": "^5.0.0",
+    "tape-rollup": "^4.6.4",
+    "tape-run": "^2.1.5"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "commonjs": true
+    },
+    "extends": "firstandthird",
+    "plugins": [
+      "compat"
+    ],
+    "rules": {
+      "compat/compat": 2
+    }
+  },
+  "scriptkit": {
+    "formats": {
+      "cjs": true
+    },
+    "files": {
+      "dist/aug.js": "index.js",
+      "test/aug.test.dist.js": "test/aug.test.js"
+    },
+    "scripts": {
+      "babel": {
+        "exclude": [
+          "node_modules/tape-rollup/*"
+        ]
+      }
+    }
+  }
 }

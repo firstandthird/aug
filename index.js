@@ -1,12 +1,22 @@
-/* eslint-disable no-restricted-syntax, guard-for-in, prefer-rest-params */
+/* eslint-disable no-restricted-syntax, guard-for-in, prefer-rest-params, no-use-before-define */
 'use strict';
+
+const aug = (...args) => {
+  args.unshift(false);
+  return merge.apply(null, args);
+};
+
+aug.defaults = (...args) => {
+  args.unshift(true);
+  return merge.apply(null, args);
+};
 
 // first arg is 'true' if using defaults-only version
 // first arg is 'false' if just doing deep merge:
-const merge = function() {
-  const args = Array.prototype.slice.call(arguments);
+function merge(...args) {
   const useDefaults = args[0];
   const destObject = {};
+
   // for each object in the rest of the argument list:
   args.slice(1, args.length).forEach((prop) => {
     // for each property in the current object:
@@ -26,7 +36,7 @@ const merge = function() {
       // if the source and destination values are both objects then recursively merge them:
       if (typeof propValue === 'object' && typeof destObject[propName] === 'object') {
         // get the right merging function for the recursive merge:
-        const merger = useDefaults ? module.exports.defaults : module.exports;
+        const merger = useDefaults ? aug.defaults : aug;
         destObject[propName] = merger(destObject[propName], propValue);
         continue;
       }
@@ -35,18 +45,6 @@ const merge = function() {
     }
   });
   return destObject;
-};
+}
 
-// exported copy of deep merge:
-module.exports = function() {
-  const args = Array.prototype.slice.call(arguments);
-  args.unshift(false);
-  return merge.apply(null, args);
-};
-
-// exported copy of defaults:
-module.exports.defaults = function() {
-  const args = Array.prototype.slice.call(arguments);
-  args.unshift(true);
-  return merge.apply(null, args);
-};
+export default aug;

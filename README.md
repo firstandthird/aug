@@ -1,5 +1,6 @@
 # aug.js
-Aug.js is simple augment/extend library.  If you've used jQuery's $.extend, then you will be familiar with it.
+
+aug.js is simple augment/extend library.  If you've used jQuery's $.extend, then you will be familiar with it.
 
 ## Installation
 
@@ -19,6 +20,7 @@ const merged = aug(person, address, pet);
 ```
 
 ### Defaults
+
 Only merge if it exists in the first argument
 
 ```javascript

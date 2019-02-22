@@ -1,8 +1,8 @@
 'use strict';
-const test = require('tap').test;
-const aug = require('../index.js');
+import test from 'tape-rollup';
+import aug from '../index';
 
-test('should override', (t) => {
+test('should override', t => {
   t.plan(2);
   const o1 = { a: 1 };
   const o2 = { a: 2 };
@@ -11,7 +11,7 @@ test('should override', (t) => {
   t.deepEqual(o1, { a: 1 });
 });
 
-test('should extend', (t) => {
+test('should extend', t => {
   t.plan(3);
   const o1 = { a: 1 };
   const o2 = { b: 2 };
@@ -21,7 +21,7 @@ test('should extend', (t) => {
   t.deepEqual(o1, { a: 1 });
 });
 
-test('should take N number of objects', (t) => {
+test('should take N number of objects', t => {
   t.plan(4);
   const o1 = { a: 1, d: 7 };
   const o2 = { a: 2, b: 4 };
@@ -33,7 +33,7 @@ test('should take N number of objects', (t) => {
   t.equal(merge.d, 7);
 });
 
-test('supports deep extend', (t) => {
+test('supports deep extend', t => {
   t.plan(3);
   const o1 = { a: { b: 1, c: 3 }, d: 1 };
   const o2 = { a: { b: 2 } };
@@ -43,7 +43,7 @@ test('supports deep extend', (t) => {
   t.equal(merged.d, 1);
 });
 
-test('objects should override basic values', (t) => {
+test('objects should override basic values', t => {
   t.plan(1);
   const o1 = { a: { b: 1, c: 3 }, d: 1 };
   const o2 = { a: { b: { x: 1 } } };
@@ -59,7 +59,7 @@ test('objects should override basic values', (t) => {
   }, merged);
 });
 
-test('should handle deep extends if root doesn\'t exist', (t) => {
+test('should handle deep extends if root doesn\'t exist', t => {
   t.plan(2);
   const o1 = { };
   const o2 = { a: { b: 2 } };
@@ -68,7 +68,7 @@ test('should handle deep extends if root doesn\'t exist', (t) => {
   t.deepEqual(o1, {});
 });
 
-test('should handled multiple levels', (t) => {
+test('should handled multiple levels', t => {
   t.plan(2);
   const o1 = { a: { b: { c: 0, d: 1 } } };
   const o2 = { a: { b: { c: 1 } } };
@@ -77,7 +77,7 @@ test('should handled multiple levels', (t) => {
   t.equal(merged.a.b.d, 1);
 });
 
-test('should overwrite arrays (not merge them)', (t) => {
+test('should overwrite arrays (not merge them)', t => {
   t.plan(3);
   const o1 = {
     tasks: {
@@ -103,7 +103,7 @@ test('should overwrite arrays (not merge them)', (t) => {
   });
 });
 
-test('somewhat real merge example', (t) => {
+test('somewhat real merge example', t => {
   t.plan(1);
   const defaults = {
     plugins: {},
@@ -128,7 +128,7 @@ test('somewhat real merge example', (t) => {
   });
 });
 
-test('should not change first param', (t) => {
+test('should not change first param', t => {
   const o1 = { a: 1 };
   const o2 = { b: 2 };
   aug(o1, o2);
@@ -136,7 +136,7 @@ test('should not change first param', (t) => {
   t.end();
 });
 
-test('deep merge', (t) => {
+test('deep merge', t => {
   const person = { info: { first: 'bob', last: 'smith' } };
   const address = { info: { last: 'jones', age: 5 }, address: '123 main st' };
   const pet = { pet: { name: 'sparky' } };
@@ -147,9 +147,9 @@ test('deep merge', (t) => {
   t.end();
 });
 
-test('defaults should work with multiple objects', (t) => {
+test('defaults should work with multiple objects', t => {
   t.plan(4);
-  const defaults = { debug: false, path: __dirname, enable: true };
+  const defaults = { debug: false, path: '/tmp/waat', enable: true };
   const o1 = { debug: true, path: '/tmp/woot', fakeThing: 123 };
   const o2 = { debug: false, path: '/tmp/woot2', fakeThing: 123 };
   const options = aug.defaults(defaults, o1, o2);
@@ -159,7 +159,7 @@ test('defaults should work with multiple objects', (t) => {
   t.equal(options.fakeThing, undefined);
 });
 
-test('should overwrite only whats existing in defaults', (t) => {
+test('should overwrite only whats existing in defaults', t => {
   const person = { info: { first: 'bob', last: 'smith' }, pet: { name: '' } };
   const address = { info: { last: 'jones', age: 5 }, address: '123 main st' };
   const pet = { pet: { name: 'sparky' } };
