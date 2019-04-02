@@ -50,14 +50,14 @@
     }
   },
   "scriptkit": {
-    "formats": {
-      "cjs": true
-    },
     "files": {
       "dist/aug.js": "index.js",
       "test/aug.test.dist.js": "test/aug.test.js"
     },
     "scripts": {
+      "formats": {
+        "cjs": true
+      },
       "babel": {
         "exclude": [
           "node_modules/tape-rollup/*"
