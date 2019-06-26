@@ -2,12 +2,14 @@
   "name": "aug",
   "version": "3.0.1",
   "description": "A library to augment objects and prototypes",
-  "main": "dist/aug.js",
-  "module": "dist/aug.esm.js",
+  "main": "dist/aug.cjs.js",
+  "module": "dist/aug.js",
   "scripts": {
     "start": "scriptkit",
     "dev": "scriptkit dev",
+    "build": "scriptkit build",
     "test": "cat test/aug.test.dist.js | tape-run --static . --browser phantomjs --render tap-spec",
+    "pretest": "scriptkit build",
     "prepublishOnly": "scriptkit"
   },
   "repository": {
@@ -26,15 +28,15 @@
   },
   "homepage": "https://github.com/firstandthird/aug#readme",
   "devDependencies": {
-    "eslint-config-firstandthird": "^4.3.0",
-    "eslint-plugin-compat": "^2.7.0",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint-config-firstandthird": "^4.4.0",
+    "eslint-plugin-compat": "^3.1.2",
+    "eslint-plugin-import": "^2.18.0",
     "phantomjs-prebuilt": "^2.1.16",
-    "scriptkit": "^2.0.1",
+    "scriptkit": "^3.0.0",
     "static-server": "^2.2.1",
     "tap-spec": "^5.0.0",
     "tape-rollup": "^4.6.4",
-    "tape-run": "^2.1.5"
+    "tape-run": "^6.0.0"
   },
   "eslintConfig": {
     "env": {
