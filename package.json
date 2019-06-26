@@ -2,7 +2,7 @@
   "name": "aug",
   "version": "3.0.1",
   "description": "A library to augment objects and prototypes",
-  "main": "index.js",
+  "main": "dist/aug.cjs.js",
   "module": "dist/aug.js",
   "scripts": {
     "start": "scriptkit",
