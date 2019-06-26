@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/firstandthird/aug.svg?branch=master)](https://travis-ci.org/firstandthird/aug)
 ![npm](https://img.shields.io/npm/v/aug.svg)
 
-aug.js is simple augment/extend library.  If you've used jQuery's $.extend, then you will be familiar with it.
+aug.js is simple augment/extend library. If you've used jQuery's $.extend, then you will be familiar with it.
 
 ## Installation
 
