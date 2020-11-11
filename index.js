@@ -1,6 +1,4 @@
-/* eslint-disable no-restricted-syntax, guard-for-in, prefer-rest-params, no-use-before-define */
-'use strict';
-
+/* eslint-disable no-use-before-define */
 const aug = (...args) => {
   args.unshift(false);
   return merge.apply(null, args);
@@ -20,7 +18,7 @@ function merge(...args) {
   // for each object in the rest of the argument list:
   args.slice(1, args.length).forEach((prop) => {
     // for each property in the current object:
-    for (const propName in prop) {
+    Object.keys(prop).forEach(propName => {
       // default-only mode skips the property if it's not present in the first object
       if (useDefaults && args[1][propName] === undefined) {
         return;
@@ -31,18 +29,18 @@ function merge(...args) {
       // if that value is an array just assign it to the dest object:
       if (Array.isArray(propValue)) {
         destObject[propName] = propValue;
-        continue;
+        return;
       }
       // if the source and destination values are both objects then recursively merge them:
       if (typeof propValue === 'object' && typeof destObject[propName] === 'object') {
         // get the right merging function for the recursive merge:
         const merger = useDefaults ? aug.defaults : aug;
         destObject[propName] = merger(destObject[propName], propValue);
-        continue;
+        return;
       }
       // otherwise just assign the value to the destination object:
       destObject[propName] = propValue;
-    }
+    });
   });
   return destObject;
 }
