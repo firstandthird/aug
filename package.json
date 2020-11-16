@@ -1,6 +1,6 @@
 {
   "name": "aug",
-  "version": "3.1.1",
+  "version": "4.0.0",
   "description": "A library to augment objects and prototypes",
   "main": "dist/aug.js",
   "module": "dist/aug.module.js",
