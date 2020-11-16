@@ -1,7 +1,7 @@
 node_modules
 npm-debug.log
 .idea
-test/*.dist.*
 dist
 *.map
 .DS_Store
+.nyc_output
