@@ -31,7 +31,7 @@
     "eslint": "^7.13.0",
     "eslint-config-firstandthird": "^6.0.2",
     "eslint-plugin-import": "^2.18.0",
-    "microbundle": "^0.12.4",
+    "microbundle": "^0.15.1",
     "tap": "^14.10.8"
   },
   "dependencies": {}
